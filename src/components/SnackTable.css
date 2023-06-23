@@ -1,0 +1,28 @@
+th,
+td {
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  padding: 1rem;
+}
+
+th:last-child,
+td:last-child {
+  border-right: 1px solid white;
+}
+
+th{
+  cursor: pointer;
+  font-weight: 900;
+}
+
+th:hover{
+  background-color: rgb(62, 61, 61);
+}
+
+tr:last-child {
+  border-bottom: 1px solid white;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
