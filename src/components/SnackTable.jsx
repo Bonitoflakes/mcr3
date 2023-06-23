@@ -2,47 +2,49 @@
 import "./SnackTable.css";
 import { useState } from "react";
 
+const emotes = ["", "👇", "👆"];
+
 export const SnackTable = ({ snacks }) => {
-  const [sort, setSort] = useState(0);
+  const [sortOrder, setSortOrder] = useState(0);
   const [sortType, setSortType] = useState("id");
   //   const [sortedSnacks, setSortedSnacks] = useState(0);
 
   const sortsnacks = [...snacks].sort((a, b) => {
-    if (sort === 0) {
+    if (sortOrder === 0) {
       console.log("Default Sort");
-      return snacks;
+      return 0;
     }
 
-    if (sort === 1) {
-      console.log("Sort by ASC");
+    if (sortOrder === 1) {
+      console.log("Sort by DESC");
       console.log(a[sortType], "a[sortType]");
       console.log(b[sortType], "b[sortType]");
-      return a[sortType] - b[sortType];
+
+      return b[sortType] > a[sortType] ? 1 : -1;
     }
 
-    if (sort === -1) {
-      console.log("Sort by DESC");
-      return b[sortType] - a[sortType];
+    if (sortOrder === 2) {
+      console.log("Sort by ASC");
+      return a[sortType] > b[sortType] ? 1 : -1;
     }
   });
 
   const handleSortClick = (sortType) => {
     setSortType(sortType);
-    console.log(sortType, "sortType");
-    console.log(sort, "sortOrder");
 
-    switch (sort) {
+    console.log(sortType, "sortType");
+    console.log(sortOrder, "sortOrder");
+
+    switch (sortOrder) {
       case 0:
-        setSort(1);
-        break;
+        return setSortOrder(1);
       case 1:
-        setSort(-1);
-        break;
-      case -1:
-        setSort(0);
-        break;
+        return setSortOrder(2);
+      case 2:
+        return setSortOrder(0);
 
       default:
+        console.error("Unknown sort order!!!");
         break;
     }
   };
@@ -52,12 +54,22 @@ export const SnackTable = ({ snacks }) => {
       <table>
         <thead>
           <tr>
-            <th onClick={() => handleSortClick("id")}>ID</th>
-            <th onClick={() => handleSortClick("product_name")}>Product Name</th>
-            <th onClick={() => handleSortClick("product_weight")}>Product Weight</th>
-            <th onClick={() => handleSortClick("price")}>Price (INR)</th>
-            <th onClick={() => handleSortClick("calories")}>Calories</th>
-            <th onClick={() => handleSortClick("ingredients")}>Ingredients</th>
+            <th onClick={() => handleSortClick("id")}>ID {sortType === "id" && emotes[sortOrder]}</th>
+            <th onClick={() => handleSortClick("product_name")}>
+              Product Name {sortType === "product_name" && emotes[sortOrder]}{" "}
+            </th>
+            <th onClick={() => handleSortClick("product_weight")}>
+              Product Weight {sortType === "product_weight" && emotes[sortOrder]}{" "}
+            </th>
+            <th onClick={() => handleSortClick("price")}>
+              Price (INR) {sortType === "price" && emotes[sortOrder]}{" "}
+            </th>
+            <th onClick={() => handleSortClick("calories")}>
+              Calories {sortType === "calories" && emotes[sortOrder]}{" "}
+            </th>
+            <th onClick={() => handleSortClick("ingredients")}>
+              Ingredients {sortType === "ingredients" && emotes[sortOrder]}{" "}
+            </th>
           </tr>
         </thead>
         <tbody>
