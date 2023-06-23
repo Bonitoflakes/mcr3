@@ -16,15 +16,10 @@ export const SnackTable = ({ snacks }) => {
     }
 
     if (sortOrder === 1) {
-      console.log("Sort by DESC");
-      console.log(a[sortType], "a[sortType]");
-      console.log(b[sortType], "b[sortType]");
-
       return b[sortType] > a[sortType] ? 1 : -1;
     }
 
     if (sortOrder === 2) {
-      console.log("Sort by ASC");
       return a[sortType] > b[sortType] ? 1 : -1;
     }
   });
