@@ -1,4 +1,4 @@
-import { SnackTable } from "./components/SnackTable";
+import { SnackTable } from "./components/SnacksTable/SnackTable";
 import { useState } from "react";
 import { snacks as API_SNACKS } from "./api/data";
 import { useEffect } from "react";
