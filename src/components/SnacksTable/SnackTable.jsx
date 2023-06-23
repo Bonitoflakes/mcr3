@@ -2,8 +2,7 @@
 import "./SnackTable.css";
 import { useState } from "react";
 import { TableBody } from "./TableBody";
-
-const emotes = ["", "👇", "👆"];
+import { TableHead } from "./TableHead";
 
 export const SnackTable = ({ snacks }) => {
   const [sortOrder, setSortOrder] = useState(0);
@@ -47,24 +46,7 @@ export const SnackTable = ({ snacks }) => {
   return (
     <div>
       <table>
-        <thead>
-          <th onClick={() => handleSortClick("id")}>ID {sortType === "id" && emotes[sortOrder]}</th>
-          <th onClick={() => handleSortClick("product_name")}>
-            Product Name {sortType === "product_name" && emotes[sortOrder]}{" "}
-          </th>
-          <th onClick={() => handleSortClick("product_weight")}>
-            Product Weight {sortType === "product_weight" && emotes[sortOrder]}{" "}
-          </th>
-          <th onClick={() => handleSortClick("price")}>
-            Price (INR) {sortType === "price" && emotes[sortOrder]}{" "}
-          </th>
-          <th onClick={() => handleSortClick("calories")}>
-            Calories {sortType === "calories" && emotes[sortOrder]}{" "}
-          </th>
-          <th onClick={() => handleSortClick("ingredients")}>
-            Ingredients {sortType === "ingredients" && emotes[sortOrder]}{" "}
-          </th>
-        </thead>
+        <TableHead handleSortClick={handleSortClick} sortOrder={sortOrder} sortType={sortType} />
         <TableBody snacks={sortedSnacks} />
       </table>
     </div>
